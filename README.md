@@ -21,4 +21,35 @@ In this first week, I added a few API Endpoints which are:
 1. POST/forum/register
 2. POST/forum/login
 3. POST/forum/logout
-4. GET/PUT/forum/profile/<int:pk>/ 
+4. GET/PUT/forum/profile/<int:pk>/ ,
+
+Week 2
+Started by reinitializing my git reposritory
+I figured how to check if my virtual environment has django installed
+Activated my virtual environment venv\Scripts\activate
+Added more API endpoints
+1. Categories:
+     GET/api/categories/
+     POST/api/categories/
+     GET/api/categories/{id}/
+     PUT/api/categories/{id}/
+     DELETE/api/categories/{id}/
+
+2. Threads:
+     GET/api/threads/
+     POST/api/threads/
+     GET/api/threads/{id}/
+     PUT/api/threads/{id}/
+     DELETE/api/threads/{id}/
+
+3. Posts:
+     GET/api/posts/
+     POST/api/posts/
+     GET/api/posts/{id}/
+     PUT/api/posts/{id}/
+     DELETE/api/posts/{id}/
+
+4. Likes:
+     POST/api/likes/
+     DELETE/api/likes/{id}/
+
