@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import register, login, logout, ProfileView, CategoryListCreateView, CategoryRetrieveUpdateDestroyView, ThreadListCreateView, ThreadRetrieveUpdateDestroyView, PostListCreateView, PostRetrieveUpdateDestroyView,LikeCreateView, LikeDestroyView
+from .views import register, login, logout, ProfileView, CategoryListCreateView, CategoryRetrieveUpdateDestroyView, ThreadListCreateView, ThreadRetrieveUpdateDestroyView, PostListCreateView, PostRetrieveUpdateDestroyView,LikeCreateView, LikeDestroyView, UserFollowListCreate, UserFollowDestroy, NotificationList, NotificationMarkRead
 
 urlpatterns = [
     path('register/', register, name='register'),
@@ -14,4 +14,8 @@ urlpatterns = [
     path('posts/<int:pk>/', PostRetrieveUpdateDestroyView.as_view(), name='post-retrieve-update-destroy'),
     path('likes/', LikeCreateView.as_view(), name='like-create'),
     path('likes/<int:pk>/', LikeDestroyView.as_view(), name='like-destroy'),
+    path('follows/', UserFollowListCreate.as_view(), name='user-follow-list-create'),
+    path('follows/<int:pk>/', UserFollowDestroy.as_view(), name='user-follow-destroy'),
+    path('notifications/', NotificationList.as_view(), name='notification-list'),
+    path('notifications/<int:pk>/mark-read/', NotificationMarkRead.as_view(), name='notification-mark-read'),
 ]
