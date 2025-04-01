@@ -53,3 +53,50 @@ Added more API endpoints
      POST/api/likes/
      DELETE/api/likes/{id}/
 
+Week 3
+ User Authentication:
+    Registration, login, and logout functionality.
+ User Profiles:
+    User profile management.
+ Categories, Threads, and Posts:
+    Create, read, update, and delete categories, threads, and posts.
+ Likes:
+    Users can like posts.
+ User Following (Subscriptions):
+    Users can follow other users, categories, or threads.
+ Notifications:
+    Users receive notifications for relevant activities.
+
+
+1. Clone the repository:
+    bash
+    git clone [repository URL]
+    
+2. Create a virtual environment:
+    bash
+    python -m venv venv
+    
+3. Activate the virtual environment:
+    On Windows: venv\Scripts\activate
+4. Install dependencies:
+    bash
+    pip install -r requirements.txt
+    
+5. Run migrations:
+    bash
+    python manage.py makemigrations
+    python manage.py migrate
+    
+6. Run the development server:
+    bash
+    python manage.py runserver
+    
+API Endpoints
+7. User Follows:
+   GET/api/follows/: List all follows of the current user.
+   POST/api/follows/: Create a new follow.
+   DELETE/api/follows/{follow_id}/: Delete a follow.
+
+8. Notifications:
+   GET/api/notifications/: List notifications for the current user.
+   PUT/api/notifications/{notification_id}/mark-read/: Mark a notification as read.
