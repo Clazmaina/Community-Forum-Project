@@ -20,24 +20,29 @@ class UserSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ['id', 'user', 'bio', 'location', 'birth_date', 'profile_picture']
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ['id', 'name', 'description']
 
 class ThreadSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     class Meta:
         model = Thread
-        fields = '__all__'
+        fields = ['id', 'title', 'category', 'author', 'created_at']
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['id', 'title', 'content', 'author', 'created_at']
+        read_only_fields = ['id', 'author', 'created_at']
+
+    def create(self, validated_data):
+        validated_data['author'] = self.context['request'].user
+        return super().create(validated_data)
 
 class LikeSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')

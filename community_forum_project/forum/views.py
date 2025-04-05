@@ -27,15 +27,18 @@ def login(request):
     if user:
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
-    return Response({'error': 'Invalid credentials'}, status=400)
+    return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def logout(request):
-    request.user.auth_token.delete()
-    return Response({'message': 'Logged out successfully'})
-
+    try:
+        request.user.auth_token.delete()
+        return Response({'message': 'Logged out successfully'}, status=status.HTTP_204_NO_CONTENT)
+    except:
+        return Response({'error': 'Logout failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+ 
 class ProfileView(generics.RetrieveUpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
@@ -68,8 +71,8 @@ class PostListCreateView(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+    def get_serializer_context(self):
+        return {'request':self.request}
 
 class PostRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
